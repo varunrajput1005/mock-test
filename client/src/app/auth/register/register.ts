@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from 'src/app/_services/api-service';
 
 @Component({
@@ -20,7 +20,7 @@ export class Register {
     confirmPassword: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private api: ApiService) { }
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) { }
 
   async onSubmit() {
     if (this.registerForm.invalid) {
@@ -35,6 +35,8 @@ export class Register {
     }
     // Call backend API here
     await this.api.post('users/register', this.registerForm.value);
+    this.router.navigate(['/auth/login']);
+
     alert('Account created successfully!');
   }
 }
