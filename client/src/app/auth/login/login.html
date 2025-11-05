@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="left-panel">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <h1>Welcome Back 👋</h1>
+    <p class="subtitle">Log in to your account to continue your preparation journey</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Enter your email" />
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Enter a valid email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter your password" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Min 6 characters</mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="login-btn" [disabled]="loginForm.invalid">
+        Login
+      </button>
+    </form>
+
+    <div class="bottom-links">
+      <a routerLink="/auth/forgot-password">Forgot Password?</a>
+      <span> | </span>
+      <a routerLink="/auth/register">Create Account</a>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="promo">
+      <h2>Get Access to 1000+ Mock Tests</h2>
+      <ul>
+        <li>✅ Topic-wise Practice Sets</li>
+        <li>📚 Detailed Explanations</li>
+        <li>📊 Performance Analytics</li>
+        <li>🎯 Previous Year Papers</li>
+      </ul>
+      <div class="app-buttons">
+        <!-- <img src="assets/appstore.png" alt="App Store" />
+        <img src="assets/playstore.png" alt="Play Store" /> -->
+      </div>
+    </div>
+  </div>
+</div>
